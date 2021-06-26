@@ -14,9 +14,9 @@ class TodoList:
                             "help": [f"help_about_command", "help - Helps about any command."],
                             "list": [f"list_to_do_tasks", "list - Lists all tasks still to do."],
                             "undone": [f"change_task_status", "undone - Marks task as undone."]}
-
+        help_texts = [value[1] for value in self.command_map.values()]
         parser = argparse.ArgumentParser(prog="todolist", description="An application for managing a to-do task list.")
-        parser.add_argument("command", choices=self.command_map.keys(), help="Choose a function", type=str)
+        parser.add_argument("command", choices=self.command_map.keys(), help="\n".join(help_texts), type=str)
         if self.num_of_args > 1:
             parser.add_argument("command_argument", type=str)
             args = parser.parse_args(sys.argv[1:])
